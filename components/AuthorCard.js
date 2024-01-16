@@ -28,8 +28,8 @@ AuthorCard.propTypes = {
   authorObj: PropTypes.shape({
     first_name: PropTypes.string,
     last_name: PropTypes.string,
-    email: PropTypes.bool,
-    favorite: PropTypes.string,
+    email: PropTypes.string,
+    favorite: PropTypes.bool,
     firebaseKey: PropTypes.string,
   }).isRequired,
 };
