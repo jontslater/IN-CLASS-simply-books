@@ -1,31 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { viewAuthorDetails } from '../../../api/mergedData';
+import AuthorForm from '../../../components/forms/AuthorForm';
+import { getSingleAuthor } from '../../../api/authorData';
 
-export default function ViewBook() {
-  const [authorDetails, setAuthorDetails] = useState({});
+export default function EditAuthor() {
+  const [editItem, setEditItem] = useState({});
   const router = useRouter();
-
-  // TODO: grab firebaseKey from url
+  // TODO: grab the firebasekey
   const { firebaseKey } = router.query;
 
-  // TODO: make call to API layer to get the data
+  // TODO: make a call to the API to get the book data
   useEffect(() => {
-    viewAuthorDetails(firebaseKey).then(setAuthorDetails);
+    getSingleAuthor(firebaseKey).then(setEditItem);
   }, [firebaseKey]);
 
-  return (
-    <div className="mt-5 d-flex flex-wrap">
-      <div className="text-white ms-5 details">
-        <h5>
-          {authorDetails.first_name} {authorDetails.last_name}
-          {authorDetails.favorite ? ' 🤍' : ''}
-        </h5>
-        Author Email: <a href={`mailto:${authorDetails.email}`}>{authorDetails.email}</a>
-        <p>{authorDetails.description || ''}</p>
-        <hr />
-        <p />
-      </div>
-    </div>
-  );
+  // TODO: pass object to form
+  return (<AuthorForm obj={editItem} />);
 }
